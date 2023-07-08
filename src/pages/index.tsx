@@ -1,15 +1,16 @@
 import { SignIn, SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import Head from "next/head";
+import Question from "~/components/Question";
 import { useState } from "react";
 import Logo from "~/components/Logo";
 import { api } from "~/utils/api";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(null);
   const user = useUser();
 
-  const question = api.questions.getOne.useQuery();
+  const {data: currentQuestion} = api.questions.getOne.useQuery();
+  console.log(currentQuestion);
 
   //home page - get random question
   //quiz mode - get number of questions (user selects 5, 10, 20, 30, etc.)
@@ -64,15 +65,14 @@ export default function Home() {
           </div>
         
           <div className="grow text-eqb-text p-5">
-            
-            {/* {currentQuestion &&
+            {currentQuestion &&
               <Question 
                 question={currentQuestion} 
               />
             }
             {!currentQuestion && 
               <p className="text-center mt-10 text-xl px-4 mb-10">No questions found.</p>
-            } */}
+            }
           </div>
         </div>
       </main>
