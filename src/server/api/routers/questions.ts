@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { createTRPCRouter, privateProcedure, publicProcedure } from "~/server/api/trpc";
 
 export const questionsRouter = createTRPCRouter({
   getOne: publicProcedure.query(({ ctx }) => {
@@ -9,4 +9,27 @@ export const questionsRouter = createTRPCRouter({
       },
     });
   }),
+
+  createOne: privateProcedure
+    .input(
+      z.object({
+        questionText: z.string(),
+        prompt: z.string(),
+        aiModelUsed: z.string(),
+      })
+    )
+    .mutation(async ({ctx, input}) => {
+      const userId = ctx.currentUser.id;
+      const question = await ctx.prisma.question.create({
+        data: {
+          questionText: input.questionText,
+          prompt: input.prompt,
+          aiModelUsed: input.aiModelUsed,
+          numberOfCorrectAnswers: 0,
+          numberOfIncorrectAnswers: 0,
+          approvals: 0,
+          disapprovals: 0,
+        }
+      })
+    })
 });

@@ -57,11 +57,11 @@ export default function Home() {
               <button className="hover:cursor">
                 About
               </button>
+              {user ? <SignOutButton />
+              :
+              <SignInButton />
+              }
             </nav>
-            {user ? <SignOutButton />
-            :
-            <SignInButton />
-            }
           </div>
         
           <div className="grow text-eqb-text p-5">
