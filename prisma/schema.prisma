@@ -12,8 +12,49 @@ datasource db {
   relationMode = "prisma"
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model User {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String   @unique
+  name      String?
+  password  String
+  role      String   @default("user")
+  questionsCreated Int
+  questionsAnswered Int
+  questionsApproved Int
+  questionsDisapproved Int
+
+  @@index([email], name: "userEmail")
+  @@index([name], name: "userName")
+  @@index([role], name: "userRole")
+}
+
+model Question {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  questionText  String
+  prompt        String
+  answers       Answer[]
+  aiModelUsed         String
+  numberOfCorrectAnswers Int
+  numberOfIncorrectAnswers Int
+  approvals     Int
+  disapprovals  Int
+
+  @@index([questionText], name: "questionText")
+}
+
+model Answer {
+  id         String   @id @default(cuid())
+  updatedAt  DateTime @updatedAt
+  answerText String
+  isCorrect  Boolean
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String
+  numberOfSelections Int
+
+  @@index([id])
+  @@index([questionId])
 }
