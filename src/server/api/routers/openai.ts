@@ -68,7 +68,7 @@ export const openaiRouter = createTRPCRouter({
         ]
       })
 
-      type OpenAiResponse = {
+      interface OpenAiResponse {
         questionText: string,
         answers: {
           answerText: string,
