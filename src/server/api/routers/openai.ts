@@ -68,7 +68,7 @@ export const openaiRouter = createTRPCRouter({
         ]
       })
 
-      interface OpenAiResponse {
+      interface IOpenAiResponse {
         questionText: string,
         answers: {
           answerText: string,
@@ -78,10 +78,13 @@ export const openaiRouter = createTRPCRouter({
 
       if (!response.data.choices) throw new Error("No response from OpenAI.")
 
-      const jsonResponses: OpenAiResponse = JSON.parse(response.data.choices[0]?.message?.content || "") 
+      let jsonResponses: IOpenAiResponse
+      if (response.data.choices[0]?.message?.content) {
+        jsonResponses = JSON.parse(response.data.choices[0]?.message?.content) as IOpenAiResponse
+      } else {
+        throw new Error("Unable to parse JSON from OpenAI response.")
+      }
 
-      if (!jsonResponses) throw new Error("Unable to parse JSON from OpenAI response.")
-      
       const questionText = jsonResponses.questionText
       const answers = jsonResponses.answers
 
