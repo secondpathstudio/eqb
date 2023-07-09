@@ -29,7 +29,7 @@ const CreatePanel = () => {
             void ctx.questions.getOne.invalidate();
 
             //navigate to question page
-            router.push(`/${questionId}`)
+            void router.push(`/${questionId}`)
         },
         onError: (error) => {
             console.error(error)
@@ -39,7 +39,7 @@ const CreatePanel = () => {
     onSuccess: (data) => {
       //save to db
       saveQuestion({
-        questionText: data.questionText!,
+        questionText: data.questionText,
         answers: data.answers,
         trainingLevel: data.trainingLevel,
         topic: data.topic,
