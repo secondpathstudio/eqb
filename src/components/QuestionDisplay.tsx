@@ -76,7 +76,7 @@ const QuestionDisplay = (props: Props) => {
 
         <div className='flex flex-col items-center justify-center'>
         {props.question?.answers.length > 0 && props.question?.answers.map((answer: Answer, index: number) => (
-            <button key={index} className={`rounded-lg border-2 w-full lg:w-1/2 text-start mb-4 py-1 ${selectedAnswer === answer ? 'border-eqb-accent bg-eqb-accent text-eqb-card-bg' : 'border-eqb-bg-dark hover:bg-eqb-bg-dark'}`} onClick={() => handleAnswerQuestion(answer)}>
+            <button key={index} className={`rounded-lg border-2 w-full lg:w-1/2 text-start mb-4 py-1 ${(selectedAnswer === answer && answer.isCorrect) ? 'border-eqb-accent bg-eqb-accent text-eqb-card-bg' : 'border-eqb-bg-dark hover:bg-eqb-bg-dark'}`} onClick={() => handleAnswerQuestion(answer)}>
                 <label className="ml-2 hover:cursor-pointer">{answer.answerText}</label>
             </button>
         ))}

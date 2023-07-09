@@ -5,6 +5,7 @@ import Logo from "~/components/Logo";
 import HomePanel from "~/components/panels/HomePanel";
 import QuestionPanel from "~/components/panels/QuestionPanel";
 import CreatePanel from "~/components/panels/CreatePanel";
+import AboutPanel from "~/components/panels/AboutPanel";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -62,7 +63,7 @@ export default function Home() {
             {activePanel === 'question' && (<QuestionPanel />)}
             {activePanel === 'home' && (<HomePanel />)}
             {activePanel === 'create' && (<CreatePanel />)}
-            {activePanel === 'about' && (<p className="text-center">About</p>)}
+            {activePanel === 'about' && (<AboutPanel />)}
           </div>
         </div>
       </main>
