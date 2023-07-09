@@ -9,7 +9,7 @@ type Props = {
 }
 
 const QuestionDisplay = (props: Props) => {
-    const percentageApproval = Math.trunc(props.question.approvals / (props.question.approvals + props.question.disapprovals) * 100);
+    const percentageApproval = Math.trunc(props.question?.approvals / (props.question?.approvals + props.question?.disapprovals) * 100);
     const ctx = api.useContext();
     const { mutate: upvote, isLoading: upvoting} = api.questions.upvoteQuestion.useMutation({
         onSuccess: (data) => {
@@ -61,17 +61,17 @@ const QuestionDisplay = (props: Props) => {
             <button className="h-5 w-5 mb-2 hover:text-eqb-accent" onClick={handleUpvote}>
                 <FontAwesomeIcon icon={faArrowUp} />
             </button>
-            <p className="text-xs">{props.question.approvals}</p>
+            <p className="text-xs">{props.question?.approvals}</p>
         </div>
         <div className="flex-col items-center justify-center flex">
             <button className="h-5 w-5 mb-2 hover:text-eqb-accent" onClick={handleDownvote}>
                 <FontAwesomeIcon icon={faArrowDown} />
             </button>
-            <p className="text-xs">{props.question.disapprovals}</p>
+            <p className="text-xs">{props.question?.disapprovals}</p>
         </div>
         </div>
         <p className="text-center mt-10 text-xl px-4 mb-10">
-        {props.question.questionText}
+        {props.question?.questionText}
         </p>
 
         <div className='flex flex-col items-center justify-center'>
