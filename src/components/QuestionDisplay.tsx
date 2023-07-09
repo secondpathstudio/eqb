@@ -36,19 +36,19 @@ const QuestionDisplay = (props: Props) => {
     const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
 
 
-    const handleUpvote = async () => {
+    const handleUpvote = () => {
         upvote({
             questionId: props.question.id
         })
     }
 
-    const handleDownvote = async () => {
+    const handleDownvote = () => {
         downvote({
             questionId: props.question.id
         })
     }
 
-    const handleAnswerQuestion = async (selectedAnswer: Answer) => {
+    const handleAnswerQuestion = (selectedAnswer: Answer) => {
         setSelectedAnswer(selectedAnswer)
         console.log(selectedAnswer);
     }

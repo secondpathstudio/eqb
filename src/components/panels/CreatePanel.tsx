@@ -54,7 +54,7 @@ const CreatePanel = () => {
   });
 
 
-    const handleGenerateQuestion = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleGenerateQuestion = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setError('')
         setLoading(true)
