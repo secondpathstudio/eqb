@@ -68,7 +68,15 @@ export const openaiRouter = createTRPCRouter({
         ]
       })
 
-      const jsonResponses = JSON.parse(response.data.choices[0]?.message?.content!)
+      type OpenAiResponse = {
+        questionText: string,
+        answers: {
+          answerText: string,
+          isCorrect: boolean
+        }[],
+      }
+
+      const jsonResponses: OpenAiResponse = JSON.parse(response.data.choices[0]?.message?.content!)
       const questionText = jsonResponses.questionText
       const answers = jsonResponses.answers
 
