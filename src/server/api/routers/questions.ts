@@ -1,9 +1,18 @@
 import { z } from "zod";
 import { createTRPCRouter, privateProcedure, publicProcedure } from "~/server/api/trpc";
+import { TrainingLevel } from "./openai";
 
 export const questionsRouter = createTRPCRouter({
-  getOne: publicProcedure.query(({ ctx }) => {
+  getOne: privateProcedure
+  .input(
+    z.object({
+      id: z.string(),
+    })
+  ).query(({ ctx, input }) => {
     return ctx.prisma.question.findFirst({
+      where: {
+        id: input.id,
+      },
       include: {
         answers: true,
       },
@@ -35,11 +44,11 @@ export const questionsRouter = createTRPCRouter({
         ),
         aiModelUsed: z.string(),
         topic: z.string(),
-        trainingLevel: z.enum(["medicalStudent", "resident", "attending"]),
+        trainingLevel: z.enum([TrainingLevel["MedicalStudent"], TrainingLevel["Resident"], TrainingLevel["Attending"]]),
       })
     )
     .mutation(async ({ctx, input}) => {
-      console.log('Saving Question')
+      console.log('Saving Question', input)
       const userId = ctx.currentUser;
       const question = await ctx.prisma.question.create({
         data: {
@@ -58,6 +67,8 @@ export const questionsRouter = createTRPCRouter({
           disapprovals: 0,
         }
       })
+
+      return question;
     }),
 
     upvoteQuestion: privateProcedure

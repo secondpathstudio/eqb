@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import QuestionDisplay from '../QuestionDisplay'
 import { api } from "~/utils/api";
 import Spinner from '../ui/spinner';
-import { Question } from '@prisma/client';
 
 const QuestionPanel = () => {
     //move to state - stop from re-rendering on window change

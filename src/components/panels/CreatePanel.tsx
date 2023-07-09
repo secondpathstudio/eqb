@@ -9,14 +9,9 @@ import {
 import { Button } from "~/components/ui/button"
 import Spinner from '../ui/spinner'
 import { api } from '~/utils/api'
+import { TrainingLevel } from '~/server/api/routers/openai'
 
 type Props = {}
-
-enum TrainingLevel {
-    MedicalStudent = "medicalstudent",
-    Resident = "resident",
-    Attending = "attending"
-}
 
 const CreatePanel = (props: Props) => {
     const [questionDetails, setQuestionDetails] = useState({
@@ -28,7 +23,8 @@ const CreatePanel = (props: Props) => {
     const ctx = api.useContext();
     const { mutate: saveQuestion, isLoading: savingQuestion, data: question} = api.questions.saveOne.useMutation({
         onSuccess: (data) => {
-            console.log('Saved question to db', question)
+            //get question ID and navigate to page for that question
+            console.log('Saved question to db', data)
             void ctx.questions.getOne.invalidate();
         },
         onError: (error) => {

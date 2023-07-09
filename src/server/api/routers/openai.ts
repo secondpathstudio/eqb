@@ -19,12 +19,18 @@ const ratelimit = new Ratelimit({
   analytics: true,
 })
 
+export enum TrainingLevel {
+  MedicalStudent = "medicalstudent",
+  Resident = "resident",
+  Attending = "attending"
+}
+
 export const openaiRouter = createTRPCRouter({
   generateQuestion: privateProcedure
     .input(
       z.object({
         topic: z.string(),
-        trainingLevel: z.enum(["medicalStudent", "resident", "attending"]),
+        trainingLevel: z.enum([TrainingLevel.MedicalStudent, TrainingLevel.Resident, TrainingLevel.Attending]),
       })
     )
     .mutation(async ({ctx, input: {topic, trainingLevel}}) => {
