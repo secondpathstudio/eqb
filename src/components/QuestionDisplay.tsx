@@ -5,7 +5,13 @@ import { Answer, Question } from '@prisma/client'
 import { api } from '~/utils/api'
 
 type Props = {
-    question: Question
+    question: {
+        id: string,
+        questionText: string,
+        approvals: number,
+        disapprovals: number,
+        answers: Answer[]
+    }
 }
 
 const QuestionDisplay = (props: Props) => {

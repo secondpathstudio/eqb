@@ -9,8 +9,6 @@ type Props = {}
 const StudyPage = (props: Props) => {
     const router = useRouter()
 
-    const {data: currentQuestion, isLoading} = api.questions.getOne.useQuery({id: router.query.questionId as string});
-
   return (
     <Layout>
         <QuestionPanel />
