@@ -18,28 +18,6 @@ enum TrainingLevel {
     Attending = "attending"
 }
 
-enum QuestionTopic {
-    Cardiology = "cardiology",
-    Pulmonology = "pulmonology",
-    Gastroenterology = "gastroenterology",
-    Nephrology = "nephrology",
-    Endocrinology = "endocrinology",
-    Hematology = "hematology",
-    Oncology = "oncology",
-    InfectiousDisease = "infectiousdisease",
-    Neurology = "neurology",
-    Rheumatology = "rheumatology",
-    Dermatology = "dermatology",
-    Ophthalmology = "ophthalmology",
-    Otolaryngology = "otolaryngology",
-    Urology = "urology",
-    ObstetricsAndGynecology = "obstetricsandgynecology",
-    Pediatrics = "pediatrics",
-    Psychiatry = "psychiatry",
-    Surgery = "surgery",
-    Trauma = "trauma"
-}
-
 const CreatePanel = (props: Props) => {
     const [questionDetails, setQuestionDetails] = useState({
         topic: '',

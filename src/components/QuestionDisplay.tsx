@@ -1,26 +1,50 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons'
-import React from 'react'
-import { Question } from '@prisma/client'
+import React, {useState} from 'react'
+import { Answer, Question } from '@prisma/client'
+import { api } from '~/utils/api'
 
 type Props = {
     question: Question
 }
 
 const QuestionDisplay = (props: Props) => {
-
     const percentageApproval = Math.trunc(props.question.approvals / (props.question.approvals + props.question.disapprovals) * 100);
+    const ctx = api.useContext();
+    const { mutate: upvote, isLoading: upvoting} = api.questions.upvoteQuestion.useMutation({
+        onSuccess: (data) => {
+            void ctx.questions.invalidate();
+        },
+        onError: (error) => {
+            console.error(error)
+        }
+    });
+    const { mutate: downvote, isLoading: downvoting} = api.questions.downvoteQuestion.useMutation({
+        onSuccess: (data) => {
+            void ctx.questions.invalidate();
+        },
+        onError: (error) => {
+            console.error(error)
+        }
+    });
+    const [selectedAnswer, setSelectedAnswer] = useState<Answer | null>(null);
+
 
     const handleUpvote = async () => {
-        //call trpc api call for upvote
+        upvote({
+            questionId: props.question.id
+        })
     }
 
     const handleDownvote = async () => {
-        //call trpc api call for downvote
+        downvote({
+            questionId: props.question.id
+        })
     }
 
-    const handleAnswerQuestion = async () => {
-        //handle question answer
+    const handleAnswerQuestion = async (selectedAnswer: Answer) => {
+        setSelectedAnswer(selectedAnswer)
+        console.log(selectedAnswer);
     }
 
   return (
@@ -34,14 +58,14 @@ const QuestionDisplay = (props: Props) => {
             </h2>
         <div className="flex gap-3 items-center justify-center">
         <div className="flex-col items-center justify-center flex">
-            <button className="h-5 w-5 mb-2 hover:text-eqb-accent">
-            <FontAwesomeIcon icon={faArrowUp} />
+            <button className="h-5 w-5 mb-2 hover:text-eqb-accent" onClick={handleUpvote}>
+                <FontAwesomeIcon icon={faArrowUp} />
             </button>
             <p className="text-xs">{props.question.approvals}</p>
         </div>
         <div className="flex-col items-center justify-center flex">
-            <button className="h-5 w-5 mb-2 hover:text-eqb-accent">
-            <FontAwesomeIcon icon={faArrowDown} />
+            <button className="h-5 w-5 mb-2 hover:text-eqb-accent" onClick={handleDownvote}>
+                <FontAwesomeIcon icon={faArrowDown} />
             </button>
             <p className="text-xs">{props.question.disapprovals}</p>
         </div>
@@ -52,9 +76,9 @@ const QuestionDisplay = (props: Props) => {
 
         <div className='flex flex-col items-center justify-center'>
         {props.question?.answers.length > 0 && props.question?.answers.map((answer: Answer, index: number) => (
-        <button key={index} className="rounded-lg bg-eqb-bg-dark w-full lg:w-1/2 text-start mb-4 py-1 hover:bg-eqb-bg-light">
-            <label className="ml-2 hover:cursor-pointer">{answer.answerText}</label>
-        </button>
+            <button key={index} className={`rounded-lg border-2 w-full lg:w-1/2 text-start mb-4 py-1 ${selectedAnswer === answer ? 'border-eqb-accent bg-eqb-accent text-eqb-card-bg' : 'border-eqb-bg-dark hover:bg-eqb-bg-dark'}`} onClick={() => handleAnswerQuestion(answer)}>
+                <label className="ml-2 hover:cursor-pointer">{answer.answerText}</label>
+            </button>
         ))}
         </div>
     </div>
