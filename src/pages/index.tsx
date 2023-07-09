@@ -4,6 +4,7 @@ import { useState } from "react";
 import Logo from "~/components/Logo";
 import HomePanel from "~/components/panels/HomePanel";
 import QuestionPanel from "~/components/panels/QuestionPanel";
+import CreatePanel from "~/components/panels/CreatePanel";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +16,13 @@ export default function Home() {
   //create mode, show question generation form
   //about page, my name, github, linkedin, etc.
   //user page? - show user stats - number of questions created, number of questions answered, votes, etc.
+
+  const handleTogglePanel = (panelName: string) => {
+    if (activePanel === panelName) {
+      return;
+    }
+    setActivePanel(panelName);
+  }
 
   return (
     <>
@@ -34,13 +42,13 @@ export default function Home() {
         <div className="flex-col flex bg-eqb-card-bg shadow-lg rounded-xl lg:w-[1000px] lg:h-[600px] max-h-full text-eqb-card-bg">
           <div className="bg-eqb-accent w-full h-14 rounded-t-xl flex justify-center items-center p-3 grow-0">
             <nav className="bg-eqb-bg-light w-2/3 rounded-xl h-full flex justify-between items-center px-4">
-              <button className="hover:cursor hover:bg-eqb-bg-dark rounded-lg px-2" onClick={() => setActivePanel('question')}>
+              <button className="hover:cursor hover:bg-eqb-bg-dark rounded-lg px-2" onClick={() => handleTogglePanel('question')}>
                 Study
               </button>
-              <button className="hover:cursor hover:bg-eqb-bg-dark rounded-lg px-2" onClick={() => setActivePanel('create')}>
+              <button className="hover:cursor hover:bg-eqb-bg-dark rounded-lg px-2" onClick={() => handleTogglePanel('create')}>
                 Create
               </button>
-              <button className="hover:cursor hover:bg-eqb-bg-dark rounded-lg px-2" onClick={() => setActivePanel('about')}>
+              <button className="hover:cursor hover:bg-eqb-bg-dark rounded-lg px-2" onClick={() => handleTogglePanel('about')}>
                 About
               </button>
             </nav>
@@ -53,7 +61,7 @@ export default function Home() {
           <div className="grow text-eqb-text p-5">
             {activePanel === 'question' && (<QuestionPanel />)}
             {activePanel === 'home' && (<HomePanel />)}
-            {activePanel === 'create' && (<p className="text-center">Create</p>)}
+            {activePanel === 'create' && (<CreatePanel />)}
             {activePanel === 'about' && (<p className="text-center">About</p>)}
           </div>
         </div>

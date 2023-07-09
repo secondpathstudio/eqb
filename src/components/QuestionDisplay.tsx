@@ -9,19 +9,19 @@ type Props = {
 
 const QuestionDisplay = (props: Props) => {
 
-const percentageApproval = Math.trunc(props.question.approvals / (props.question.approvals + props.question.disapprovals) * 100);
+    const percentageApproval = Math.trunc(props.question.approvals / (props.question.approvals + props.question.disapprovals) * 100);
 
-const handleUpvote = async () => {
-    //call trpc api call for upvote
-}
+    const handleUpvote = async () => {
+        //call trpc api call for upvote
+    }
 
-const handleDownvote = async () => {
-    //call trpc api call for downvote
-}
+    const handleDownvote = async () => {
+        //call trpc api call for downvote
+    }
 
-const handleAnswerQuestion = async () => {
-    //handle question answer
-}
+    const handleAnswerQuestion = async () => {
+        //handle question answer
+    }
 
   return (
     <div className="text-center">
@@ -51,7 +51,7 @@ const handleAnswerQuestion = async () => {
         </p>
 
         <div className='flex flex-col items-center justify-center'>
-        {props.question.answers.length > 0 && props.question.answers.map((answer: Answer, index: number) => (
+        {props.question?.answers.length > 0 && props.question?.answers.map((answer: Answer, index: number) => (
         <button key={index} className="rounded-lg bg-eqb-bg-dark w-full lg:w-1/2 text-start mb-4 py-1 hover:bg-eqb-bg-light">
             <label className="ml-2 hover:cursor-pointer">{answer.answerText}</label>
         </button>
