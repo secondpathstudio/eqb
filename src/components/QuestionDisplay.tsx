@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import React, {useState} from 'react'
-import { Answer, Question } from '@prisma/client'
+import { Answer } from '@prisma/client'
 import { api } from '~/utils/api'
 
 type Props = {

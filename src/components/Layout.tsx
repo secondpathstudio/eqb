@@ -1,5 +1,5 @@
 import React from 'react'
-import { SignIn, SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import Head from "next/head";
 import { useState } from "react";
 import Link from 'next/link';
