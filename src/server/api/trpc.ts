@@ -32,7 +32,9 @@ type CreateContextOptions = Record<string, never>;
 export const createTRPCContext = (opts: CreateNextContextOptions) => {
   const {req} = opts;
   const authSesh = getAuth(req);
-  const user = authSesh.user;
+  console.log('auth sesh', authSesh)
+  const user = authSesh.userId;
+  console.log('user', user)
 
   return {
     prisma,
