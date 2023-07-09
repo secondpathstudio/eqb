@@ -44,7 +44,7 @@ export const openaiRouter = createTRPCRouter({
         });
       }
       
-      const prompt: string = `Create a question for a ${trainingLevel} studying for a ${topic} exam. Please include the question and 4 answers. 
+      const prompt = `Create a question for a ${trainingLevel} studying for a ${topic} exam. Please include the question and 4 answers. 
         Please make sure the question is appropriate for the training level. Please return the response in the following JSON format: 
         {
           "questionText": "What is the most common cause of death in the United States?",
