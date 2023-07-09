@@ -21,13 +21,13 @@ const Layout = (props: Props) => {
         <link rel="icon" href="/endlessqbank.svg" />
       </Head>
       <main className="flex min-h-screen h-screen flex-col items-center bg-gradient-to-b from-eqb-bg-light to-eqb-bg-dark px-10 text-eqb-text">
-        <button className="fill-black flex lg:flex-row flex-col items-center text-3xl text-black mb-5" onClick={() => setActivePanel('home')}>
+        <Link className="fill-black flex lg:flex-row flex-col items-center text-3xl text-black mb-5" href="/">
           Endless
           <Logo 
             rotate={isLoading}
           />
           Q Bank
-        </button>
+        </Link>
         <div className="flex-col flex bg-eqb-card-bg shadow-lg rounded-xl lg:w-[1000px] lg:h-[600px] max-h-full text-eqb-card-bg">
           <div className="bg-eqb-accent w-full h-14 rounded-t-xl flex justify-center items-center p-3 grow-0">
             <nav className="bg-eqb-bg-light w-2/3 rounded-xl h-full flex justify-between items-center px-4">
