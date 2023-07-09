@@ -7,10 +7,31 @@ type Props = {
     question: Question
 }
 
-const Question = (props: Props) => {
+const QuestionDisplay = (props: Props) => {
+
+const percentageApproval = Math.trunc(props.question.approvals / (props.question.approvals + props.question.disapprovals) * 100);
+
+const handleUpvote = async () => {
+    //call trpc api call for upvote
+}
+
+const handleDownvote = async () => {
+    //call trpc api call for downvote
+}
+
+const handleAnswerQuestion = async () => {
+    //handle question answer
+}
+
   return (
     <div className="text-center">
-        <h2 className="font-bold text-xl">{Math.trunc(props.question.approvals / (props.question.approvals + props.question.disapprovals) * 100)}% Approval</h2>
+        <h2 className="font-bold text-xl">
+            {percentageApproval > 0 ? 
+                `${percentageApproval}% Approval`
+                :
+                "No votes yet"
+            }
+            </h2>
         <div className="flex gap-3 items-center justify-center">
         <div className="flex-col items-center justify-center flex">
             <button className="h-5 w-5 mb-2 hover:text-eqb-accent">
@@ -40,4 +61,4 @@ const Question = (props: Props) => {
   )
 }
 
-export default Question
+export default QuestionDisplay
