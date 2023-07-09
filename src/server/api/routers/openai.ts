@@ -76,7 +76,12 @@ export const openaiRouter = createTRPCRouter({
         }[],
       }
 
-      const jsonResponses: OpenAiResponse = JSON.parse(response.data.choices[0]?.message?.content!)
+      if (!response.data.choices) throw new Error("No response from OpenAI.")
+
+      const jsonResponses: OpenAiResponse = JSON.parse(response.data.choices[0]?.message?.content || "") 
+
+      if (!jsonResponses) throw new Error("Unable to parse JSON from OpenAI response.")
+      
       const questionText = jsonResponses.questionText
       const answers = jsonResponses.answers
 
