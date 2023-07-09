@@ -5,9 +5,7 @@ import QuestionDisplay from '~/components/QuestionDisplay'
 import { api } from '~/utils/api'
 import Spinner from '~/components/ui/spinner'
 
-type Props = {}
-
-const SpecificQuestionPage = (props: Props) => {
+const SpecificQuestionPage = () => {
     const router = useRouter()
 
     const {data: currentQuestion, isLoading} = api.questions.getOne.useQuery({id: router.query.questionId as string});

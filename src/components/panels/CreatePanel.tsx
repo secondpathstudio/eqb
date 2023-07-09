@@ -12,9 +12,7 @@ import { api } from '~/utils/api'
 import { TrainingLevel } from '~/server/api/routers/openai'
 import { useRouter } from 'next/router'
 
-type Props = {}
-
-const CreatePanel = (props: Props) => {
+const CreatePanel = () => {
     const [questionDetails, setQuestionDetails] = useState({
         topic: '',
         trainingLevel: '',

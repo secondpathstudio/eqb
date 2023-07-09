@@ -4,9 +4,7 @@ import Layout from '~/components/Layout'
 import QuestionPanel from '~/components/panels/QuestionPanel'
 import { api } from '~/utils/api'
 
-type Props = {}
-
-const AboutPage = (props: Props) => {
+const AboutPage = () => {
     const router = useRouter()
 
   return (

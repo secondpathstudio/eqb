@@ -1,8 +1,6 @@
 import React from 'react'
 
-type Props = {}
-
-const Spinner = (props: Props) => {
+const Spinner = () => {
   return (
     <svg 
         width="24" 
