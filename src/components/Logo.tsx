@@ -12,13 +12,13 @@ const Logo = (props: Props) => {
         xmlns="http://www.w3.org/2000/svg"
         width="150" 
         height="150" 
-        className={`${props.rotate ? 'animate-spin' : ''}`}
+        className={`${props.rotate ? 'animate-spin-slow' : ''}`}
         viewBox="0 0 1024 1024"
         preserveAspectRatio="xMidYMid meet"
     >
 
     <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)"
-    fill="current" stroke="none">
+    fill="inherit" stroke="none">
     <path d="M5558 8360 c-206 -26 -434 -119 -617 -252 -88 -64 -250 -235 -312
     -328 -150 -226 -228 -474 -230 -726 -1 -170 56 -271 189 -336 59 -29 76 -33
     147 -33 71 0 88 4 147 33 121 59 175 146 189 306 13 141 25 188 74 291 71 146
