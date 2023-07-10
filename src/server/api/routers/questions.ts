@@ -19,6 +19,23 @@ export const questionsRouter = createTRPCRouter({
     });
   }),
 
+  getQuestionVote: privateProcedure
+  .input(
+    z.object({
+      questionId: z.string(),
+    })
+  ).query(({ ctx, input }) => {
+    const userId = ctx.currentUser;
+    return ctx.prisma.questionVote.findUnique({
+      where: {
+        userId_questionId: {
+          userId: userId,
+          questionId: input.questionId,
+        }
+      }
+    });
+  }),
+
   getRandom: publicProcedure.query(async ({ ctx }) => {
     const questionCount = await ctx.prisma.question.count();
     const skip = Math.max(0, Math.floor(Math.random() * questionCount));
@@ -90,6 +107,23 @@ export const questionsRouter = createTRPCRouter({
             }
           }
         })
+
+        const vote = await ctx.prisma.questionVote.upsert({
+          where: {
+            userId_questionId: {
+              userId: userId,
+              questionId: input.questionId,
+            }
+          },
+          update: {
+            approved: true
+          },
+          create: {
+            userId: userId,
+            questionId: input.questionId,
+            approved: true,
+          },
+        })
       }),
 
       downvoteQuestion: privateProcedure
@@ -110,6 +144,23 @@ export const questionsRouter = createTRPCRouter({
               increment: 1,
             }
           }
+        })
+
+        const vote = await ctx.prisma.questionVote.upsert({
+          where: {
+            userId_questionId: {
+              userId: userId,
+              questionId: input.questionId,
+            }
+          },
+          update: {
+            approved: false
+          },
+          create: {
+            userId: userId,
+            questionId: input.questionId,
+            approved: false,
+          },
         })
       })
 });

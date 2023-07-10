@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Layout from "~/components/Layout";
+import Logo from "~/components/Logo";
+import LogoTwoTone from "~/components/Logo-TwoTone";
 
 export default function Home() {
   //home page - get random question
@@ -10,8 +12,9 @@ export default function Home() {
 
   return (
     <Layout>
-      <div>
-        Welcome to Endless Q Bank!
+      <div className="flex flex-col w-full h-full items-center justify-center fill-eqb-accent">
+        <LogoTwoTone rotate={true}  />
+        <h3 className="text-2xl italic">Welcome to an endless education.</h3>
       </div>
     </Layout>
   );
