@@ -24,6 +24,7 @@ model User {
   questionsAnswered Int
   questionsApproved Int
   questionsDisapproved Int
+  questionVotes QuestionVote[]
 
   @@index([email], name: "userEmail")
   @@index([name], name: "userName")
@@ -43,6 +44,7 @@ model Question {
   numberOfIncorrectAnswers Int
   approvals     Int
   disapprovals  Int
+  questionVotes QuestionVote[]
 
   @@index([questionText], name: "questionText")
 }
@@ -58,4 +60,17 @@ model Answer {
 
   @@index([id])
   @@index([questionId])
+}
+
+model QuestionVote {
+  updatedAt  DateTime @updatedAt
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  approved   Boolean
+
+  @@unique([userId, questionId])
+  @@index([questionId])
+  @@index([userId])
 }
