@@ -68,7 +68,7 @@ const QuestionDisplay = (props: Props) => {
             <button
                 disabled={selectedAnswer != null}
                 key={index} 
-                className={`rounded-lg border-2 w-full text-center mb-4 py-1 border-eqb-text hover:text-eqb-card-bg hover:bg-eqb-text ${(selectedAnswer === answer && answer.isCorrect) && 'border-green-700 bg-green-700 text-eqb-card-bg'} ${(selectedAnswer === answer && !answer.isCorrect) && 'border-red-700 bg-red-700'}`} 
+                className={`rounded-lg border-2 w-full text-center mb-4 py-1 ${(selectedAnswer === answer ? (answer.isCorrect ? 'border-green-700 bg-green-700 text-eqb-card-bg' : 'border-red-700 bg-red-700') : 'border-eqb-text bg-eqb-card-bg hover:text-eqb-card-bg hover:bg-eqb-text')}`} 
                 onClick={() => handleAnswerQuestion(answer)}
                 >
                 <label className="ml-2 hover:cursor-pointer">{answer.answerText}</label>
