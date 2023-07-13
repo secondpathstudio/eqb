@@ -11,7 +11,6 @@ type Props = {
     question: {
         id: string,
         questionText: string,
-        explanation: string,
         approvals: number,
         disapprovals: number,
         answers: Answer[]
