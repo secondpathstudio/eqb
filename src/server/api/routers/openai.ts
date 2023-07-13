@@ -86,7 +86,8 @@ export const openaiRouter = createTRPCRouter({
         questionText: string,
         answers: {
           answerText: string,
-          isCorrect: boolean
+          isCorrect: boolean,
+          explanation: string,
         }[],
       }
 
