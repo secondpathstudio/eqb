@@ -26,7 +26,7 @@ const Layout = (props: Props) => {
         <Link className="fill-black flex lg:flex-row flex-col items-center text-3xl text-black mb-5" href="/">
           Endless Q Bank
         </Link>
-        <div className="flex-col flex bg-eqb-card-bg shadow-lg rounded-xl w-full max-w-6xl min-h-[600px] h-[600px] text-eqb-card-bg">
+        <div className="flex-col flex bg-eqb-card-bg shadow-lg rounded-xl w-full max-w-6xl min-h-[600px] md:h-[600px] h-fit text-eqb-card-bg">
           <div className="bg-eqb-accent w-full h-14 rounded-t-xl grid lg:grid-cols-5 grid-cols-3 justify-center items-center p-3">
             <nav className="bg-eqb-bg-light rounded-xl h-full flex justify-between items-center px-4 lg:col-start-2 lg:col-end-5 col-span-2 py-1">
               <Link className="hover:cursor hover:bg-eqb-bg-dark rounded-lg px-2" href="/study">
