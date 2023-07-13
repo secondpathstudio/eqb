@@ -91,6 +91,11 @@ const CreatePanel = () => {
                             <SelectItem value="peds">Pediatrics</SelectItem>
                             <SelectItem value="id">Infectious Disease</SelectItem>
                             <SelectItem value="cardiology">Cardiology</SelectItem>
+                            <SelectItem value="neurology">Neurology</SelectItem>
+                            <SelectItem value="ob">Obstetrics</SelectItem>
+                            <SelectItem value="gynecology">Gynecology</SelectItem>
+                            <SelectItem value="urology">Urology</SelectItem>
+                            <SelectItem value="vascular">Vascular</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
@@ -107,7 +112,7 @@ const CreatePanel = () => {
                     </Select>
                 </div>
             </div>
-            <div className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-3 mt-20'>
             {error && <p className='text-red-500'>{error}</p>}
             <Button 
                 className='bg-eqb-card-bg hover:bg-eqb-accent border-eqb-accent text-eqb-accent' 

@@ -1,15 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbsUp as thumbsUpSolid, faThumbsDown as thumbsDownSolid } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp as thumbsUpSolid, faThumbsDown as thumbsDownSolid, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons'
 import React, {useState} from 'react'
 import { Answer } from '@prisma/client'
 import { api } from '~/utils/api'
 import { useUser } from '@clerk/nextjs'
+import Spinner from './ui/spinner'
 
 type Props = {
     question: {
         id: string,
         questionText: string,
+        explanation: string,
         approvals: number,
         disapprovals: number,
         answers: Answer[]
@@ -54,7 +56,6 @@ const QuestionDisplay = (props: Props) => {
 
     const handleAnswerQuestion = (selectedAnswer: Answer) => {
         setSelectedAnswer(selectedAnswer)
-        console.log(selectedAnswer);
     }
 
   return (
@@ -65,13 +66,31 @@ const QuestionDisplay = (props: Props) => {
 
         <div className='flex flex-col items-center justify-center'>
         {props.question?.answers.length > 0 && props.question?.answers.map((answer: Answer, index: number) => (
-            <button key={index} className={`rounded-lg border-2 w-full text-center mb-4 py-1 ${(selectedAnswer === answer && answer.isCorrect) ? 'border-eqb-accent bg-eqb-accent text-eqb-card-bg' : 'border-eqb-bg-dark hover:bg-eqb-bg-dark'}`} onClick={() => handleAnswerQuestion(answer)}>
+            <button
+                disabled={selectedAnswer != null}
+                key={index} 
+                className={`rounded-lg border-2 w-full text-center mb-4 py-1 border-eqb-text hover:text-eqb-card-bg hover:bg-eqb-text ${(selectedAnswer === answer && answer.isCorrect) && 'border-green-700 bg-green-700 text-eqb-card-bg'} ${(selectedAnswer === answer && !answer.isCorrect) && 'border-red-700 bg-red-700'}`} 
+                onClick={() => handleAnswerQuestion(answer)}
+                >
                 <label className="ml-2 hover:cursor-pointer">{answer.answerText}</label>
             </button>
         ))}
         </div>
 
+        {selectedAnswer?.id != null && 
+            <div className="flex flex-col items-center justify-center">
+                {selectedAnswer?.explanation}
+            </div>
+        }
+
         <p className='mt-10 font-bold text-xl'>Is this a good question?</p>
+        {(upvoting || downvoting) ? 
+        <div className='flex justify-center items-center w-full h-5'>
+            <div className='w-5 h-5'>
+                <Spinner />
+            </div>
+        </div>
+        :
         <div className="flex gap-3 items-center justify-center">
             <div className="flex-col items-center justify-center flex">
                 <button className="h-5 w-5 mb-2 hover:text-eqb-accent disabled:hover:text-eqb-text" onClick={handleUpvote} disabled={questionVote?.approved === true}>
@@ -88,6 +107,7 @@ const QuestionDisplay = (props: Props) => {
                 <p className="text-xs">{props.question?.disapprovals}</p>
             </div>
         </div>
+        }
         {percentageApproval > 0 ? 
             `${percentageApproval}% Approval`
             :

@@ -35,7 +35,7 @@ model Question {
   id            String   @id @default(cuid())
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  questionText  String
+  questionText  String  @db.VarChar(500)
   topic         String
   trainingLevel String
   answers       Answer[]
@@ -56,6 +56,7 @@ model Answer {
   isCorrect  Boolean
   question   Question @relation(fields: [questionId], references: [id])
   questionId String
+  explanation   String  @default("No explanation provided") @db.VarChar(500)
   numberOfSelections Int
 
   @@index([id])

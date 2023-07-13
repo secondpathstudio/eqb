@@ -57,6 +57,7 @@ export const questionsRouter = createTRPCRouter({
             answerText: z.string(),
             isCorrect: z.boolean(),
             numberOfSelections: z.number().default(0),
+            explanation: z.string()
           })
         ),
         aiModelUsed: z.string(),
@@ -108,6 +109,7 @@ export const questionsRouter = createTRPCRouter({
           }
         })
 
+        //TODO remove old vote if it exists
         const vote = await ctx.prisma.questionVote.upsert({
           where: {
             userId_questionId: {
@@ -146,6 +148,7 @@ export const questionsRouter = createTRPCRouter({
           }
         })
 
+        //TODO remove old vote if it exists
         const vote = await ctx.prisma.questionVote.upsert({
           where: {
             userId_questionId: {
