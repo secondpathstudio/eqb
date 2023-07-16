@@ -15,6 +15,10 @@ export default function Home() {
       <div className="flex flex-col w-full h-full items-center justify-center fill-eqb-accent">
         <LogoTwoTone rotate={true}  />
         <h3 className="text-2xl italic">Welcome to an endless education.</h3>
+        <div className='text-md text-center mt-5 flex flex-col justify-center w-full'>
+          <p>AI-generated question bank for medical education, enhanced by a crowd-sourced approval system.</p>
+          <p>Create a free account to vote on questions & earn tokens to help generate more and grow the Endless Q Bank!</p>
+        </div>
       </div>
     </Layout>
   );
