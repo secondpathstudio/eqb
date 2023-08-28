@@ -3,7 +3,6 @@ import { SignInButton, SignOutButton, UserButton, useUser } from "@clerk/nextjs"
 import Head from "next/head";
 import { useState } from "react";
 import Link from 'next/link';
-import Logo from "~/components/Logo";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignIn, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,12 +18,13 @@ const generateBoxShadow = (n: number) => {
   return value;
 };
 
+const smallStars = generateBoxShadow(100);
+const mediumStars = generateBoxShadow(50);
+const bigStars = generateBoxShadow(30);
+
 const Layout = (props: Props) => {
     const user = useUser();
     const [isLoading, setIsLoading] = useState(false);
-    const smallStars = generateBoxShadow(100);
-    const mediumStars = generateBoxShadow(50);
-    const bigStars = generateBoxShadow(30);
 
   return (
     <>
@@ -50,12 +50,12 @@ const Layout = (props: Props) => {
           style={{ boxShadow: bigStars, animationDuration: '150s' }}
         ></div>
       {/* Main Box */}
-      <div className="absolute left-0 right-0 flex min-h-screen h-full py-10 flex-col items-center px-10 text-eqb-text">
-        <Link className="fill-black flex lg:flex-row flex-col items-center text-3xl text-eqb-text mb-5" href="/">
+      <div className="absolute left-0 right-0 flex min-h-screen h-full py-10 justify-center flex-col items-center px-10 text-eqb-text overflow-scroll">
+        <Link className="fill-black flex lg:flex-row flex-col items-center text-3xl mb-5 font-bold" href="/">
           Endless Q Bank
         </Link>
-        <div className="flex-col flex bg-eqb-card-bg shadow-lg rounded-xl w-full max-w-6xl min-h-[600px] md:h-[600px] h-fit text-eqb-card-bg">
-          <div className="bg-eqb-accent w-full h-14 rounded-t-xl grid lg:grid-cols-5 grid-cols-3 justify-center items-center p-3">
+        <div className="shadow-lg flex-col flex bg-eqb-card-bg rounded-xl w-full max-w-6xl min-h-[600px] h-fit text-eqb-card-bg">
+          <div className="bg-eqb-accent w-full h-14 rounded-t-xl grid lg:grid-cols-5 grid-cols-3 justify-center items-center p-2">
             <nav className="bg-eqb-bg-light rounded-xl h-full flex justify-between items-center px-4 lg:col-start-2 lg:col-end-5 col-span-2 py-1">
               <Link className="hover:cursor hover:bg-eqb-bg-dark rounded-lg px-2" href="/study">
                 Study
@@ -67,20 +67,20 @@ const Layout = (props: Props) => {
                 About
               </Link>
             </nav>
-            <div className='flex justify-end items-center w-full gap-2 text-sm'>
-              <button className='w-5 h-5 flex justify-center items-center hover:text-eqb-bg-dark'>
-              {user.isSignedIn ? 
-                <UserButton afterSignOutUrl='/'/>
-              :
-              <SignInButton>
-                <FontAwesomeIcon icon={faSignIn}  />
-              </SignInButton>
-              }
+            <div className='flex justify-end items-center w-full gap-2'>
+              <button className='w-5 h-5 mr-3 flex justify-center items-center text-white'>
+                {user.isSignedIn ? 
+                  <UserButton afterSignOutUrl='/'/>
+                :
+                <SignInButton>
+                  <FontAwesomeIcon icon={faSignIn} />
+                </SignInButton>
+                }
               </button>
             </div>
           </div>
         
-          <div className="grow text-eqb-text p-5">
+          <div className="grow text-eqb-text p-4">
             {props.children}
           </div>
         </div>
