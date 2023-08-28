@@ -17,11 +17,11 @@ module.exports = {
     },
     extend: {
       colors: {
-        "eqb-card-bg": "#003049",
-        "eqb-bg-dark": "#D62828",
-        "eqb-bg-light": "#F77F00",
-        "eqb-accent": "#FCBF49",
-        "eqb-text": "#EAE2B7",
+        "eqb-card-bg": "#090A0F",
+        "eqb-bg-dark": "#66999B",
+        "eqb-bg-light": "#FFEAEC",
+        "eqb-accent": "#66999B",
+        "eqb-text": "#FFEAEC",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -70,12 +70,25 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        "anim-star-key": {
+          '0%': { transform: 'translateY(0px)' },
+          '100%': { transform: 'translateY(-2000px)' },
+        },
+      },
+      boxShadow: {
+        'stars-small': 'shadow-sm',
+        'stars-medium': 'shadow-md',
+        'stars-big': 'shadow-lg',
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         'spin-slow': 'spin 3s linear infinite',
+        'anim-star': 'anim-star-key 50s linear infinite',
+        'anim-star-100': 'anim-star-key 100s linear infinite',
+        'anim-star-150': 'anim-star-key 150s linear infinite',
       },
+
     },
   },
   plugins: [require("tailwindcss-animate")],

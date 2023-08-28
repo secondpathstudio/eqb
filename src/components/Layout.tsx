@@ -11,9 +11,20 @@ type Props = {
     children: React.ReactNode;
 }
 
+const generateBoxShadow = (n: number) => {
+  let value = `${Math.floor(Math.random() * 2000)}px ${Math.floor(Math.random() * 2000)}px #FFF`;
+  for (let i = 2; i <= n; i++) {
+    value += `, ${Math.floor(Math.random() * 2000)}px ${Math.floor(Math.random() * 2000)}px #FFF`;
+  }
+  return value;
+};
+
 const Layout = (props: Props) => {
     const user = useUser();
     const [isLoading, setIsLoading] = useState(false);
+    const smallStars = generateBoxShadow(100);
+    const mediumStars = generateBoxShadow(50);
+    const bigStars = generateBoxShadow(30);
 
   return (
     <>
@@ -22,8 +33,25 @@ const Layout = (props: Props) => {
         <meta name="description" content="An endless Q bank." />
         <link rel="icon" href="/endlessqbank.svg" />
       </Head>
-      <main className="flex min-h-screen h-full py-10 flex-col items-center bg-gradient-to-b from-eqb-bg-light to-eqb-bg-dark px-10 text-eqb-text">
-        <Link className="fill-black flex lg:flex-row flex-col items-center text-3xl text-black mb-5" href="/">
+      <main className="h-screen bg-gradient-to-t from-[#1B2735] to-[#090A0F] overflow-hidden relative">
+      {/* Small Stars */}
+        <div 
+          className="z-0 absolute w-1 h-1 bg-transparent animate-anim-star"
+          style={{ boxShadow: smallStars, animationDuration: '50s' }}
+        ></div>
+      {/* Medium Stars */}
+        <div 
+          className="z-0 absolute w-[6px] h-[6px] bg-transparent animate-anim-star-100"
+          style={{ boxShadow: mediumStars, animationDuration: '100s' }}
+        ></div>
+      {/* Big Stars */}
+        <div 
+          className="z-0 absolute w-3 h-3 bg-transparent animate-anim-star-150"
+          style={{ boxShadow: bigStars, animationDuration: '150s' }}
+        ></div>
+      {/* Main Box */}
+      <div className="absolute left-0 right-0 flex min-h-screen h-full py-10 flex-col items-center px-10 text-eqb-text">
+        <Link className="fill-black flex lg:flex-row flex-col items-center text-3xl text-eqb-text mb-5" href="/">
           Endless Q Bank
         </Link>
         <div className="flex-col flex bg-eqb-card-bg shadow-lg rounded-xl w-full max-w-6xl min-h-[600px] md:h-[600px] h-fit text-eqb-card-bg">
@@ -56,7 +84,8 @@ const Layout = (props: Props) => {
             {props.children}
           </div>
         </div>
-        </main>
+      </div>
+    </main>
     </>
   )
 }
