@@ -114,12 +114,13 @@ const CreatePanel = () => {
             </div>
             <div className='flex flex-col gap-3 mt-20'>
             {error && <p className='text-red-500'>{error}</p>}
+            {generatingQuestion && <p className='text-eqb-accent italic'>This can take a minute...</p>}
             <Button 
                 className='bg-eqb-card-bg hover:bg-eqb-accent border-eqb-accent text-eqb-accent' 
                 variant="outline"
                 type='submit'
                 disabled={generatingQuestion}>
-                {generatingQuestion && <p className='flex items-center gap-2'>Generating <Spinner /></p>}
+                {generatingQuestion && !savingQuestion && <p className='flex items-center gap-2'>Generating <Spinner /></p>}
                 {savingQuestion && <p className='flex items-center gap-2'>Saving <Spinner /></p>}
                 {!generatingQuestion && !savingQuestion && <p>Generate Question</p>}
             </Button>

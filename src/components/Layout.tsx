@@ -68,15 +68,11 @@ const Layout = (props: Props) => {
               </Link>
             </nav>
             <div className='flex justify-end items-center w-full gap-2'>
-              <button className='w-5 h-5 mr-3 flex justify-center items-center text-white'>
-                {user.isSignedIn ? 
-                  <UserButton afterSignOutUrl='/'/>
-                :
-                <SignInButton>
-                  <FontAwesomeIcon icon={faSignIn} />
-                </SignInButton>
-                }
-              </button>
+              {user.isSignedIn ? 
+                <UserButton afterSignOutUrl='/'/>
+              :
+              <SignInButton />
+              }
             </div>
           </div>
         
